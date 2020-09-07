@@ -3,15 +3,13 @@ const { v1 } = require('uuid')
 const { join } = require('path')
 const puppeteer = require('puppeteer')
 
-const cwd = __dirname
-
 const BC_URL = 'https://erickwendel.github.io/business-card-template/index.html'
 
 
 async function render({ finalUrl, name }) {
     const WIDTH = 1920;
     const HEIGHT = 1080;
-    const output = join(cwd, `/../output/${name}-${v1()}.pdf`)
+    const output = join(__dirname, `/../output/${name}-${v1()}.pdf`)
 
     const browser = await puppeteer.launch({
         // headless: false,
