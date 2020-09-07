@@ -14,7 +14,6 @@ async function handleConcurrency(counter) {
     return counter
 }
 
-
 ;
 (async function main() {
     let counter = 0;

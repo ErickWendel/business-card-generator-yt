@@ -4,44 +4,37 @@ copy the default values from business-card-template
 
 mkdir business-card-generator
     npm init -y
-    package.json
-        type module
-        start -top-level-await
+    mkdir resources && touch data.json
+        paste default values 
     touch index.js
-        import data.json
-        show error
-    package.json 
-        -experimental-json-modules 
-    run again
+        all excluding handleConcurrency
     worker.js
-        import { parentPort, threadId } from 'worker_threads'
-
-        parentPort.once('message', (data) => {
-            console.log(`${threadId} got message: ${data}`);
-            // parentPort.close()
-            parentPort.postMessage({ threadId })
-        });
-    index.js
-        import data from '../resources/data.json'
-        import { dirname } from 'path'
-        import { Worker } from 'worker_threads'
-        const { pathname: currentFile } = new URL(import.meta.url)
-        const cwd = dirname(currentFile)
-        const moduleName = `${cwd}/worker.js`
-
-        for (const item of data) {
-            const worker = new Worker(moduleName)
-            worker.on('message', msg => console.log(msg))
-            worker.on('error', console.error)
-            worker.postMessage(item)
+        async function main(data) {
+            const pid = process.pid
+            console.log(`${pid} got message: ${data.name}`);
         }
+        process.once('message', main)
+    run it
 
-    run
-    worker 
-        npm i nightmare uuid
-        copy cwd from index
-        import querystring
+    npm i puppeteer
+    worker.js
+        const querystring = require('querystring')
         
+        const qs = createQueryStringFromObject(data);
+        const finalUrl = `${BC_URL}?${qs}`
+        console.log(finalUrl)
+
+        create render
+            ->  headless: false,
+    index.js -> only one
+    run
+    index.js -> all
+        headless: true
+    run
+    make 70 copies on the JSON and show errors
+    index.js
+        handleConcurrency
+    run
 
 
 

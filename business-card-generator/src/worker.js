@@ -41,16 +41,16 @@ function createQueryStringFromObject(data) {
 }
 
 async function main(data) {
-    const threadId = process.pid
-    console.log(`${threadId} got message: ${data.name}`);
+    const pid = process.pid
+    console.log(`${pid} got message: ${data.name}`);
     const qs = createQueryStringFromObject(data);
     const finalUrl = `${BC_URL}?${qs}`
 
     try {
         await render({ finalUrl, name: data.name })
-        process.send(`${threadId} has finished`)
+        process.send(`${pid} has finished`)
     } catch (error) {
-        process.send(`${threadId} has crashed: ${error.stack}`)
+        process.send(`${pid} has crashed: ${error.stack}`)
     }
 
 }
