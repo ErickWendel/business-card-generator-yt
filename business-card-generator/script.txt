@@ -1,0 +1,48 @@
+show the repo
+show the business-card-template URL running
+copy the default values from business-card-template 
+
+mkdir business-card-generator
+    npm init -y
+    package.json
+        type module
+        start -top-level-await
+    touch index.js
+        import data.json
+        show error
+    package.json 
+        -experimental-json-modules 
+    run again
+    worker.js
+        import { parentPort, threadId } from 'worker_threads'
+
+        parentPort.once('message', (data) => {
+            console.log(`${threadId} got message: ${data}`);
+            // parentPort.close()
+            parentPort.postMessage({ threadId })
+        });
+    index.js
+        import data from '../resources/data.json'
+        import { dirname } from 'path'
+        import { Worker } from 'worker_threads'
+        const { pathname: currentFile } = new URL(import.meta.url)
+        const cwd = dirname(currentFile)
+        const moduleName = `${cwd}/worker.js`
+
+        for (const item of data) {
+            const worker = new Worker(moduleName)
+            worker.on('message', msg => console.log(msg))
+            worker.on('error', console.error)
+            worker.postMessage(item)
+        }
+
+    run
+    worker 
+        npm i nightmare uuid
+        copy cwd from index
+        import querystring
+        
+
+
+
+https://blog.insiderattack.net/deep-dive-into-worker-threads-in-node-js-e75e10546b11

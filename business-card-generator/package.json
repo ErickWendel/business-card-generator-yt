@@ -1,0 +1,19 @@
+{
+  "name": "business-card-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "rm -rf output && mkdir -p output && node --experimental-json-modules --harmony-top-level-await src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^5.2.1",
+    "puppeteer-core": "^5.2.1",
+    "uuid": "^8.3.0"
+  }
+}
