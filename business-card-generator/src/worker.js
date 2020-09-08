@@ -42,7 +42,6 @@ async function main(data) {
     try {
         await render({ finalUrl, name: data.name })
         process.send(`${pid} has finished`)
-        
     } catch (error) {
         process.send(`${pid} has crashed: ${error.stack}`)
     }
@@ -51,7 +50,7 @@ async function main(data) {
 
 
 
-process.on('message', main)
+process.once('message', main)
 
 
 
