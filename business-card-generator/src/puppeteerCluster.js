@@ -9,8 +9,6 @@ const BC_URL = 'https://erickwendel.github.io/business-card-template/index.html'
 
 async function render({ page, data: { finalUrl, name } }) {
     
-    const WIDTH = 1920;
-    const HEIGHT = 1080;
     const output = join(__dirname, `/../output/${name}-${v1()}.pdf`)
 
     await page.goto(finalUrl, { waitUntil: 'networkidle2', });

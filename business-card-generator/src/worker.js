@@ -5,19 +5,11 @@ const puppeteer = require('puppeteer')
 
 const BC_URL = 'https://erickwendel.github.io/business-card-template/index.html'
 
-const sleep = ms => new Promise(r => setTimeout(r, ms))
-
 async function render({ finalUrl, name }) {
-    const WIDTH = 1920;
-    const HEIGHT = 1080;
     const output = join(__dirname, `/../output/${name}-${v1()}.pdf`)
 
     const browser = await puppeteer.launch({
         // headless: false,
-        defaultViewport: {
-            height: HEIGHT,
-            width: WIDTH
-        }
     });
     const page = await browser.newPage();
     await page.goto(finalUrl, { waitUntil: 'networkidle2', });
@@ -49,8 +41,8 @@ async function main(data) {
 
     try {
         await render({ finalUrl, name: data.name })
-
         process.send(`${pid} has finished`)
+        
     } catch (error) {
         process.send(`${pid} has crashed: ${error.stack}`)
     }

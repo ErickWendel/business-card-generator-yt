@@ -5,16 +5,15 @@ const moduleName = `${__dirname}/worker.js`
 
 ;
 (async function main() {
-    const worker = cp.fork(moduleName, [])
+    
     for (const item of data) {
         console.log('data', item.name)
-
+        const worker = cp.fork(moduleName, [])
+        
         worker.on('message', msg => console.log(msg))
         worker.on('error', msg => console.error('error!', msg))
 
         worker.send(item);
-        await sleep(500)
-
     }
 
 })();
