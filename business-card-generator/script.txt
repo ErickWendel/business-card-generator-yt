@@ -33,6 +33,7 @@ mkdir business-card-generator
     run
     make 70 copies on the JSON and show errors
     index.js
+        sleep
         handleConcurrency
     run
 

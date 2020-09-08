@@ -5,6 +5,7 @@ const puppeteer = require('puppeteer')
 
 const BC_URL = 'https://erickwendel.github.io/business-card-template/index.html'
 
+const sleep = ms => new Promise(r => setTimeout(r, ms))
 
 async function render({ finalUrl, name }) {
     const WIDTH = 1920;
@@ -48,6 +49,7 @@ async function main(data) {
 
     try {
         await render({ finalUrl, name: data.name })
+
         process.send(`${pid} has finished`)
     } catch (error) {
         process.send(`${pid} has crashed: ${error.stack}`)
@@ -55,7 +57,9 @@ async function main(data) {
 
 }
 
-process.once('message', main)
+
+
+process.on('message', main)
 
 
 
